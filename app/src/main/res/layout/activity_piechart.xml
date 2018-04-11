@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_above="@+id/chart1"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="详细统计信息"
+            android:textSize="22sp"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_margin="5dp"
+        android:layout_alignBottom="@+id/chart1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvXMax"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:textSize="18sp"
+            android:layout_height="wrap_content"
+            android:text="和值奇：75"
+             />
+        <TextView
+            android:id="@+id/tvYMax"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:textSize="18sp"
+            android:layout_height="wrap_content"
+            android:text="和值偶：25"
+            />
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/job"
+        android:layout_width="wrap_content"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_height="wrap_content"
+        android:text="奇偶比："
+        />
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/chart1"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        />
+
+</LinearLayout>

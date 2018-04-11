@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">最新开奖</string>
+    <string name="history">开奖历史</string>
+    <string name="news">最新新闻</string>
+    <string name="map">购彩地图</string>
+    <string name="zoushi">走势分析</string>
+    <string name="shuoming">免责说明</string>
+    <string name="wanfan">玩法说明</string>
+    <string name="pie">详细走势</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+</resources>
