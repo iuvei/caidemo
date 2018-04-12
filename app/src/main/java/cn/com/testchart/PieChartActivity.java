@@ -166,7 +166,6 @@ public class PieChartActivity extends DemoBase implements
 
     @Override
     public void onValueSelected(Entry e, Highlight h) {
-
         if (e == null)
             return;
         Log.i("VAL SELECTED",

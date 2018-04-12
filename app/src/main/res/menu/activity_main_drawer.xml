@@ -2,37 +2,42 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:tools="http://schemas.android.com/tools"
       tools:showIn="navigation_view">
-
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import"/>
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery"/>
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow"/>
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools"/>
+        <item android:title="更多功能">
+            <menu>
+                <item
+                    android:id="@+id/nav_map"
+                    android:icon="@drawable/map"
+                    android:title="周边地图"/>
+                <item
+                    android:id="@+id/nav_news"
+                    android:icon="@drawable/xinwen"
+                    android:title="彩票资讯"/>
+                <item
+                    android:id="@+id/nav_zoushi"
+                    android:icon="@drawable/zoushi"
+                    android:title="走势分析"/>
+                <item
+                    android:id="@+id/nav_slideshow"
+                    android:visible="false"
+                    android:icon="@drawable/shuoming"
+                    android:title="免责说明"/>
+                <item
+                    android:id="@+id/nav_wanfa"
+                    android:icon="@drawable/jieda"
+                    android:title="玩法解答"/>
+            </menu>
+        </item>
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="系统设置">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share"/>
-            <item
                 android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send"/>
+                android:icon="@drawable/updata"
+                android:title="版本更新"/>
         </menu>
     </item>
+
 
 </menu>

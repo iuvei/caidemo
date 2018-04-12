@@ -44,4 +44,5 @@ dependencies {
     implementation project(':MPChartLib')
     compile(name: 'newsagent', ext: 'aar')
     compile(name: 'adagent', ext: 'aar')
+    implementation files('libs/BaiduLBS_Android.jar')
 }

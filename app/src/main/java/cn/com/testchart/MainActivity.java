@@ -1,6 +1,8 @@
 package cn.com.testchart;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -19,13 +21,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -33,6 +38,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.baidu.mapapi.SDKInitializer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +47,7 @@ import cn.com.testchart.adapter.KaijiangAdapter;
 import cn.com.testchart.adapter.ShapeLoadingDialog;
 import cn.com.testchart.bean.KaiJiangInfo;
 import cn.com.testchart.util.ParseJsonUtil;
+import cn.jpush.android.api.JPushInterface;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -59,6 +66,18 @@ public class MainActivity extends AppCompatActivity
             }
             else if(msg.what==2){
                 shapeLoadingDialog.dismiss();
+
+            }else if(msg.what==3){
+                startActivity(new Intent(MainActivity.this,MapActivity.class));
+            }else if(msg.what==4){
+                startActivity(new Intent(MainActivity.this,NewsActivity.class));
+            }else if(msg.what==5){
+                startActivity(new Intent(MainActivity.this,ZoushiActivty.class));
+            }else if(msg.what==6){
+                startActivity(new Intent(MainActivity.this,WanFaActivity.class));
+            }else if(msg.what==7){
+                shapeLoadingDialog.dismiss();
+                Toast.makeText(MainActivity.this,"当前为最新版本\n版本号：1.1.0",Toast.LENGTH_LONG).show();
             }
 
         }
@@ -66,7 +85,17 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.activity_main);
+        JPushInterface.init(getApplicationContext());
+        setTitle("最新开奖");
+        /*Intent intent = getIntent();
+
+        if(intent.getExtras()!=null){
+            String message = intent.getStringExtra("message");
+            setCostomMsg(message);
+        }*/
+
         USER=getSharedPreferences("USER",MODE_PRIVATE);
         listView=findViewById(R.id.listview);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -115,18 +144,85 @@ public class MainActivity extends AppCompatActivity
         });
         String image = USER.getString("IMAGE", "");
         if(!TextUtils.isEmpty(image)){
-            imageView.setImageBitmap(BitmapFactory.decodeFile(image));
+            try {
+                imageView.setImageBitmap(BitmapFactory.decodeFile(image));
+            }catch (Exception e){
+
+            }
         }
         userName=headerView.findViewById(R.id.tv_username);
+        userName.setText("用户昵称："+USER.getString("USERNAME",""));
         userName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                login(USER.getString("USERNAME",""));
             }
         });
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    /**
+     * 登陆注册
+     */
+    private void login(String name) {
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog, null);
+        final EditText username = view.findViewById(R.id.username);
+        if(!TextUtils.isEmpty(name)){
+            username.setText(name);
+        }
+        AlertDialog.Builder  builder=new AlertDialog.Builder(this);
+        builder.setTitle("填写信息");
+        builder.setView(view);
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(TextUtils.isEmpty(username.getText())){
+                    Toast.makeText(MainActivity.this,"昵称不能为空",Toast.LENGTH_SHORT).show();
+                }else{
+                    USER.edit().putString("USERNAME",username.getText().toString().trim()).commit();
+                    userName.setText("用户昵称："+username.getText().toString().trim());
+                    Toast.makeText(MainActivity.this,"设置成功",Toast.LENGTH_SHORT).show();
+
+                    alertDialog.dismiss();
+                }
+            }
+        });
+    }
+    AlertDialog alertDialog = null;
+    private void setCostomMsg( String msg) {
+        AlertDialog.Builder builder=new AlertDialog.Builder(MainActivity.this,AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+        builder.setTitle("提示信息");
+        builder.setMessage(msg);
+        builder.setIcon(R.drawable.btn_about_on);
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alertDialog = builder.create();
+        alertDialog.show();
+    }
     private void getImage(){
         Intent intent = new Intent(
                 Intent.ACTION_PICK,
@@ -274,23 +370,38 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if(id == R.id.nav_map){
+            //地图
+            handler.sendEmptyMessageDelayed(3,300);
 
-        } else if (id == R.id.nav_slideshow) {
+        }else if (id==R.id.nav_news) {
+            //新闻
+            handler.sendEmptyMessageDelayed(4,300);
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_zoushi) {
+            //走势
+            handler.sendEmptyMessageDelayed(5,300);
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_wanfa) {
+            //玩法
+            handler.sendEmptyMessageDelayed(6,300);
 
-        } else if (id == R.id.nav_send) {
-
+        }  else if (id == R.id.nav_send) {
+            shouDialog("检查可用更新...");
+            handler.sendEmptyMessageDelayed(7,1800);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void shouDialog(String string) {
+        shapeLoadingDialog = new ShapeLoadingDialog.Builder(this)
+                .loadText(string)
+                .build();
+        shapeLoadingDialog.setCanceledOnTouchOutside(false);
+        shapeLoadingDialog.show();
     }
 
 }

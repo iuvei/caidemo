@@ -1,5 +1,8 @@
 package cn.com.testchart;
+
 import android.app.Application;
+
+import com.mastersdk.android.NewMasterSDK;
 
 import java.util.ArrayList;
 /**
@@ -16,7 +19,7 @@ public class MyApplication extends Application{
         list.add("http://9563003.com:9991");
         list.add("http://9563004.com:9991");
         list.add("http://9563005.com:9991");
-       // NewMasterSDK.init(arg0,list,this);
+        NewMasterSDK.init(arg0,list,this);
     }
 
 }

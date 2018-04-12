@@ -21,6 +21,7 @@ import com.android.volley.toolbox.Volley;
 import java.util.ArrayList;
 
 import cn.com.testchart.adapter.KaijiangAdapter;
+import cn.com.testchart.adapter.ShapeLoadingDialog;
 import cn.com.testchart.bean.KaiJiangInfo;
 import cn.com.testchart.util.ParseJsonUtil;
 
@@ -34,7 +35,13 @@ public class HistoryActivity extends AppCompatActivity {
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            listView.setAdapter(new KaijiangAdapter(HistoryActivity.this, arrayList));
+            if(msg.what==1){
+                shapeLoadingDialog.dismiss();
+                listView.setAdapter(new KaijiangAdapter(HistoryActivity.this, arrayList));
+            }else   if(msg.what==2){
+                getLotteryData((String) msg.obj);
+            }
+
         }
     };
 
@@ -44,7 +51,11 @@ public class HistoryActivity extends AppCompatActivity {
         setContentView(R.layout.history);
         String charExtra = getIntent().getStringExtra("TAG");
         listView=findViewById(R.id.hislistview);
-        getLotteryData(charExtra);
+        shouDialog("正在获取中....");
+        Message message = handler.obtainMessage();
+        message.what=2;
+        message.obj=charExtra;
+        handler.sendMessageDelayed(message,2500);
         ImageView imageView=findViewById(R.id.chartview);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,4 +94,12 @@ public class HistoryActivity extends AppCompatActivity {
     }.start();
 
 }
+    private ShapeLoadingDialog shapeLoadingDialog;
+    private void shouDialog(String string) {
+        shapeLoadingDialog = new ShapeLoadingDialog.Builder(this)
+                .loadText(string)
+                .build();
+        shapeLoadingDialog.setCanceledOnTouchOutside(false);
+        shapeLoadingDialog.show();
+    }
 }
