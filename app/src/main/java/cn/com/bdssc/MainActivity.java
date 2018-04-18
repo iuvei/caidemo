@@ -1,4 +1,4 @@
-package cn.com.testchart;
+package cn.com.bdssc;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -43,10 +43,11 @@ import com.baidu.mapapi.SDKInitializer;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.com.testchart.adapter.KaijiangAdapter;
-import cn.com.testchart.adapter.ShapeLoadingDialog;
-import cn.com.testchart.bean.KaiJiangInfo;
-import cn.com.testchart.util.ParseJsonUtil;
+import cn.com.bdssc.adapter.KaijiangAdapter;
+import cn.com.bdssc.adapter.ShapeLoadingDialog;
+import cn.com.bdssc.bean.KaiJiangInfo;
+import cn.com.bdssc.util.CheckUtil;
+import cn.com.bdssc.util.ParseJsonUtil;
 import cn.jpush.android.api.JPushInterface;
 
 public class MainActivity extends AppCompatActivity
@@ -65,7 +66,10 @@ public class MainActivity extends AppCompatActivity
                 listView.setAdapter(new KaijiangAdapter(MainActivity.this,kaiJiangInfoArrayList));
             }
             else if(msg.what==2){
-                shapeLoadingDialog.dismiss();
+                if(shapeLoadingDialog!=null){
+                    shapeLoadingDialog.dismiss();
+                }
+
 
             }else if(msg.what==3){
                 startActivity(new Intent(MainActivity.this,MapActivity.class));
@@ -298,6 +302,11 @@ public class MainActivity extends AppCompatActivity
     private RequestQueue mRequestQueue  = null;
     private ArrayList<KaiJiangInfo> kaiJiangInfoArrayList;
     private void getLotteryData(){
+        if(!CheckUtil.isNetworkAvailable(MainActivity.this)){
+            Toast.makeText(MainActivity.this,"没有检测到数据连接，请检查设备网络状态！",Toast.LENGTH_SHORT).show();
+            handler.sendEmptyMessage(2);
+            return;
+        }
         kaiJiangInfoArrayList=new ArrayList<>();
         new Thread(){
             @Override
@@ -311,7 +320,11 @@ public class MainActivity extends AppCompatActivity
                         public void onResponse(String s) {
                             Log.d("lee", s);
                             List<KaiJiangInfo> kaiJiangInfos = ParseJsonUtil.ParseKaijiang(s);
-                            kaiJiangInfoArrayList.add(kaiJiangInfos.get(0));
+                            if(kaiJiangInfos!=null&&kaiJiangInfos.size()>0){
+                                kaiJiangInfoArrayList.add(kaiJiangInfos.get(0));
+                            }else{
+                                kaiJiangInfoArrayList.add(new KaiJiangInfo("06,10,21,28,29,31+12","2018-04-15 21:18:20","2018042","ssq"));
+                            }
                             Log.d("lee","kaiJiangInfos:"+kaiJiangInfoArrayList.size());
                             if(kaiJiangInfoArrayList.size()==9){
                                 handler.sendEmptyMessage(1);
@@ -321,6 +334,8 @@ public class MainActivity extends AppCompatActivity
                         @Override
                         public void onErrorResponse(VolleyError volleyError) {
                             Log.d("lee", volleyError.toString());
+                            handler.sendEmptyMessage(2);
+                            Toast.makeText(MainActivity.this,"数据获取失败，请检查网络",Toast.LENGTH_SHORT).show();
                         }
                     }) ;
                     mRequestQueue.add(request);

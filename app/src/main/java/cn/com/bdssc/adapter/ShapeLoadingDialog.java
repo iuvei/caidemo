@@ -1,11 +1,11 @@
-package cn.com.testchart.adapter;
+package cn.com.bdssc.adapter;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
-import cn.com.testchart.R;
+import cn.com.bdssc.R;
 /**
  * Created by zzz40500 on 15/6/15.
  */

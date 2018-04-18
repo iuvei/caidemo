@@ -1,4 +1,4 @@
-package cn.com.testchart.bean;
+package cn.com.bdssc.bean;
 
 import android.os.Parcel;
 import android.os.Parcelable;

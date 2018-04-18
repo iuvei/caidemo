@@ -1,4 +1,4 @@
-package cn.com.testchart.adapter;
+package cn.com.bdssc.adapter;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;
@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 import com.nineoldandroids.view.ViewHelper;
 
-import cn.com.testchart.R;
+import cn.com.bdssc.R;
 
 
 /**

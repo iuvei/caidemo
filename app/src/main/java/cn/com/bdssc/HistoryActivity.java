@@ -1,4 +1,4 @@
-package cn.com.testchart;
+package cn.com.bdssc;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -20,10 +21,11 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.ArrayList;
 
-import cn.com.testchart.adapter.KaijiangAdapter;
-import cn.com.testchart.adapter.ShapeLoadingDialog;
-import cn.com.testchart.bean.KaiJiangInfo;
-import cn.com.testchart.util.ParseJsonUtil;
+import cn.com.bdssc.adapter.KaijiangAdapter;
+import cn.com.bdssc.adapter.ShapeLoadingDialog;
+import cn.com.bdssc.bean.KaiJiangInfo;
+import cn.com.bdssc.util.CheckUtil;
+import cn.com.bdssc.util.ParseJsonUtil;
 
 /**
  * Created by Administrator on 2018/4/11.
@@ -68,6 +70,14 @@ public class HistoryActivity extends AppCompatActivity {
     private RequestQueue mRequestQueue = null;
 
     private void getLotteryData(final String tag) {
+        if(!CheckUtil.isNetworkAvailable(HistoryActivity.this)){
+            Toast.makeText(HistoryActivity.this,"没有检测到数据连接，请检查设备网络状态！",Toast.LENGTH_SHORT).show();
+            if(shapeLoadingDialog!=null){
+                shapeLoadingDialog.dismiss();
+            }
+
+            return;
+        }
         arrayList = new ArrayList<>();
         new Thread() {
             @Override
@@ -86,6 +96,8 @@ public class HistoryActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         Log.d("lee", volleyError.toString());
+                        handler.sendEmptyMessage(2);
+                        Toast.makeText(HistoryActivity.this,"数据获取失败，请检查网络",Toast.LENGTH_SHORT).show();
                     }
                 });
                 mRequestQueue.add(request);

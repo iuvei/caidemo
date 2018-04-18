@@ -1,4 +1,4 @@
-package cn.com.testchart;
+package cn.com.bdssc;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -41,8 +41,8 @@ import com.baidu.mapapi.search.poi.PoiSortType;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.com.testchart.adapter.ShapeLoadingDialog;
-import cn.com.testchart.bean.PioBean;
+import cn.com.bdssc.adapter.ShapeLoadingDialog;
+import cn.com.bdssc.bean.PioBean;
 
 /**
  * Created by Administrator on 2018/1/30.

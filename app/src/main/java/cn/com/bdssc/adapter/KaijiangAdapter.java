@@ -1,4 +1,4 @@
-package cn.com.testchart.adapter;
+package cn.com.bdssc.adapter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import cn.com.testchart.R;
-import cn.com.testchart.bean.KaiJiangInfo;
+import cn.com.bdssc.R;
+import cn.com.bdssc.bean.KaiJiangInfo;
 
 /**
  * Created by Administrator on 2018/1/25.

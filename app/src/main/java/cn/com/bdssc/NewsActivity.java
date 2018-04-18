@@ -1,4 +1,4 @@
-package cn.com.testchart;
+package cn.com.bdssc;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,7 +15,7 @@ import com.stonesun.newssdk.NewsAgent;
 import com.stonesun.newssdk.fragment.NewsAFragment;
 import com.stonesun.newssdk.sharesdk.NewsSDKShare;
 
-import cn.com.testchart.adapter.ShapeLoadingDialog;
+import cn.com.bdssc.adapter.ShapeLoadingDialog;
 
 /**
  * Created by Administrator on 2018/1/30.

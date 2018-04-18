@@ -1,4 +1,4 @@
-package cn.com.testchart.util;
+package cn.com.bdssc.util;
 
 import android.util.Log;
 
@@ -7,7 +7,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import cn.com.testchart.bean.KaiJiangInfo;
+import cn.com.bdssc.bean.KaiJiangInfo;
 
 
 /**

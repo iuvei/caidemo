@@ -1,4 +1,4 @@
-package cn.com.testchart.bean;
+package cn.com.bdssc.bean;
 
 /**
  * Created by Administrator on 2018/1/25.
@@ -10,6 +10,15 @@ public class KaiJiangInfo {
    private String kaijiangNum;
    private String kaijiangName;
 
+   public KaiJiangInfo(String kaijiangCode,String kaijiangDate, String kaijiangNum, String kaijiangName){
+       this.kaijiangCode=kaijiangCode;
+       this.kaijiangDate=kaijiangDate;
+       this.kaijiangNum=kaijiangNum;
+       this.kaijiangName=kaijiangName;
+   }
+    public KaiJiangInfo(){
+
+    }
     @Override
     public String toString() {
         return "KaiJiangInfo{" +

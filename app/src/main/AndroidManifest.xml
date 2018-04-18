@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="cn.com.testchart"
+          package="cn.com.bdssc"
           android:versionCode="1"
           android:versionName="1.10"
           android:installLocation="auto">
@@ -9,11 +9,11 @@
     <uses-feature android:glEsVersion="0x00020000" />
 
     <permission
-        android:name="cn.com.testchart.permission.JPUSH_MESSAGE"
+        android:name="cn.com.bdssc.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature" />
 
     <!-- Required  一些系统要求的权限，如访问网络等-->
-    <uses-permission android:name="cn.com.testchart.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="cn.com.bdssc.permission.JPUSH_MESSAGE" />
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -57,15 +57,14 @@
 
     <application
                  android:label="@string/app_name"
-                 android:icon="@drawable/k3"
-                 android:roundIcon="@drawable/k3"
+                 android:icon="@drawable/sslogo"
                  android:largeHeap="true"
-                 android:name="cn.com.testchart.MyApplication" >
+                 android:name="cn.com.bdssc.MyApplication" >
 
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="ysluytYO3kakaopSnx2irbQcoCRdGi0a" />
+            android:value="GOOSnobl2DgtGB9YObEZQ0VAjiUP2t5o" />
 
         <meta-data android:name="APP_CHANNEL" android:value="cai33" />
         <!-- Tell Cocos2dxActivity the name of our .so -->
@@ -108,7 +107,7 @@
             <intent-filter>
                 <action android:name="cn.jpush.android.ui.PushActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="cn.com.testchart" />
+                <category android:name="cn.com.bdssc" />
             </intent-filter>
         </activity>
         <!-- Required  SDK核心功能-->
@@ -141,7 +140,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.DaemonService" />
-                <category android:name="cn.com.testchart" />
+                <category android:name="cn.com.bdssc" />
             </intent-filter>
 
         </service>
@@ -153,7 +152,7 @@
             android:exported="false">
             <intent-filter android:priority="1000">
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />   <!--Required  显示通知栏 -->
-                <category android:name="cn.com.testchart" />
+                <category android:name="cn.com.bdssc" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.USER_PRESENT" />
@@ -184,30 +183,30 @@
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" /> <!--Required  用户打开自定义通知栏的intent-->
                 <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK" /> <!--Optional 用户接受Rich Push Javascript 回调函数的intent-->
                 <action android:name="cn.jpush.android.intent.CONNECTION" /><!-- 接收网络变化 连接/断开 since 1.6.3 -->
-                <category android:name="cn.com.testchart" />
+                <category android:name="cn.com.bdssc" />
             </intent-filter>
         </receiver>
 
 
         <!-- Required  . Enable it you can get statistics data with channel -->
         <meta-data android:name="JPUSH_CHANNEL" android:value="developer-default"/>
-        <meta-data android:name="JPUSH_APPKEY" android:value="7ef838dbabd42c0a6846cab9" /> <!--  </>值来自开发者平台取得的AppKey-->
+        <meta-data android:name="JPUSH_APPKEY" android:value="0a6759d45395b46d23c4cbaf" /> <!--  </>值来自开发者平台取得的AppKey-->
 
-        <activity android:name="cn.com.testchart.MainActivity"
+        <activity android:name="cn.com.bdssc.MainActivity"
                   android:theme="@style/AppTheme.NoActionBar">
             <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>-->
         </activity>
-        <activity android:name=".HistoryActivity"
+        <activity android:name="cn.com.bdssc.HistoryActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".PieChartActivity"
+        <activity android:name="cn.com.bdssc.PieChartActivity"
                   android:theme="@style/Theme.AppCompat.Light.DarkActionBar"></activity>
-        <activity android:name=".NewsActivity"
+        <activity android:name="cn.com.bdssc.NewsActivity"
                   android:label="@string/news"
                   android:theme="@style/AppTheme"></activity>
-        <activity android:name=".ToastActivity"
+        <activity android:name="cn.com.bdssc.ToastActivity"
                   android:theme="@style/AppTheme"></activity>
         <!-- 以下必须声明 -->
         <meta-data android:name="MANA_APPKEY"
@@ -237,14 +236,14 @@
             android:theme="@style/AppTheme"/>
         <activity android:name="com.stonesun.newssdk.activity.AdvertActivity"
                   android:theme="@style/AppTheme"></activity>
-        <activity android:name=".WanFaActivity"
+        <activity android:name="cn.com.bdssc.WanFaActivity"
                   android:theme="@style/AppTheme"></activity>
-        <activity android:name=".ShuoMingActivity"
+        <activity android:name="cn.com.bdssc.ShuoMingActivity"
                   android:theme="@style/AppTheme"></activity>
-        <activity android:name=".ZoushiActivty"
+        <activity android:name="cn.com.bdssc.ZoushiActivty"
                   android:label="@string/zoushi"
                   android:theme="@style/AppTheme"></activity>
-        <activity android:name=".MapActivity"
+        <activity android:name="cn.com.bdssc.MapActivity"
                   android:label="@string/map"
                   android:theme="@style/AppTheme" ></activity>
 

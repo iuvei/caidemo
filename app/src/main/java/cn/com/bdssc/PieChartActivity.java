@@ -1,5 +1,5 @@
 
-package cn.com.testchart;
+package cn.com.bdssc;
 
 import android.graphics.Color;
 import android.graphics.Typeface;

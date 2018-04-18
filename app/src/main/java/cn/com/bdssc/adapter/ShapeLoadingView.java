@@ -1,4 +1,4 @@
-package cn.com.testchart.adapter;
+package cn.com.bdssc.adapter;
 
 import android.animation.ArgbEvaluator;
 import android.annotation.TargetApi;
@@ -10,7 +10,7 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 
-import cn.com.testchart.R;
+import cn.com.bdssc.R;
 
 
 /**

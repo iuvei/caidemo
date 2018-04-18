@@ -1,10 +1,11 @@
-package cn.com.testchart;
+package cn.com.bdssc;
 
 import android.app.Application;
 
 import com.mastersdk.android.NewMasterSDK;
 
 import java.util.ArrayList;
+
 /**
  * Created by lee on 2018/4/9.
  */
@@ -19,7 +20,10 @@ public class MyApplication extends Application{
         list.add("http://9563003.com:9991");
         list.add("http://9563004.com:9991");
         list.add("http://9563005.com:9991");
-        NewMasterSDK.init(arg0,list,this);
+       // if(CheckUtil.isNetworkAvailable(this)){
+            NewMasterSDK.init(arg0,list,this);
+      //  }
+
     }
 
 }

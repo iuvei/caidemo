@@ -1,4 +1,4 @@
-package cn.com.testchart;
+package cn.com.bdssc;
 
 import android.app.Activity;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package cn.com.testchart.util;
+package cn.com.bdssc.util;
 
 import android.app.ProgressDialog;
 import android.content.Context;
